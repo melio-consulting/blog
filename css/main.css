@@ -1,0 +1,74 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,700);
+
+/* ==========================================================================
+	$Navbar
+========================================================================== */
+
+  .navbar-nav .dropdown:hover .dropdown-menu {
+    display: block; }
+  .navbar-nav a.dropdown-toggle:active {
+    pointer-events: none; }
+
+/* ==========================================================================
+	$Footer
+========================================================================== */
+.footer {
+  text-align: center; }
+  .footer-top {
+    background-color: #16697a;
+    padding-top: 50px; }
+  .footer-bottom {
+    background-color: #154c57;
+    padding: 20px 0; }
+  .footer .footer-col {
+    margin-bottom: 80px; }
+  .footer h5 {
+    font-family: "Raleway", sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #fff; }
+  .footer h5 {
+    margin-bottom: 20px; }
+  .footer p {
+    font-size: 14px;
+    line-height: 22.4px;
+    color: rgba(255, 255, 255, 0.5); }
+  .footer a {
+    color: #fff; }
+    .footer a:hover {
+      color: #ef9035; }
+  .footer .footer-share {
+    margin-top: 0; }
+    .footer .footer-share li {
+      display: inline-block;
+      float: none; }
+    .footer .footer-share a {
+      border-width: 2px;
+      color: #fff; }
+  .footer .fa-heart {
+    color: #ef9035;
+    font-size: 11px;
+    margin: 0 2px; }
+
+body {
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  color: #6c7279; }
+
+h6 {
+  font-size: 14px;
+  color: #7a7977;
+  text-align: center;
+  padding-top: 5px;
+  font-weight: 400 !important;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
