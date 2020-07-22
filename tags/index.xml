@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Melio Consulting</title>
+    <link>https://blog.melio.ai/tags/</link>
+    <description>Recent content in Tags on Melio Consulting</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 22 May 2020 17:21:36 +0200</lastBuildDate>
+    
+	<atom:link href="https://blog.melio.ai/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>datascience</title>
+      <link>https://blog.melio.ai/tags/datascience/</link>
+      <pubDate>Fri, 22 May 2020 17:21:36 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/datascience/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>medium</title>
+      <link>https://blog.melio.ai/tags/medium/</link>
+      <pubDate>Fri, 22 May 2020 17:21:36 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/medium/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mlops</title>
+      <link>https://blog.melio.ai/tags/mlops/</link>
+      <pubDate>Fri, 22 May 2020 17:21:36 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/mlops/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
