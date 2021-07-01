@@ -6,10 +6,15 @@
     <description>Recent content in mlops on Melio Consulting</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 22 May 2020 17:21:36 +0200</lastBuildDate>
-    
-	<atom:link href="https://blog.melio.ai/tags/mlops/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 12 Jan 2021 17:21:36 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/tags/mlops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>What the Ops are you talkiing about?</title>
+      <link>https://blog.melio.ai/what-the-ops/</link>
+      <pubDate>Tue, 12 Jan 2021 17:21:36 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/what-the-ops/</guid>
+      <description>How to choose between DataOps vs MLOps vs AIOps - what are the right Ops for your big data team?</description>
+    </item>
     
     <item>
       <title>Launching Into Uncertainty - 6 Smart Steps to Future-Proof Your ML Models</title>
