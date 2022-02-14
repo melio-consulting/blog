@@ -6,11 +6,20 @@
     <description>Recent content in Tags on Melio Consulting</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 12 Jan 2021 17:21:36 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 12 Feb 2022 08:00:00 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>dataops</title>
+      <link>https://blog.melio.ai/tags/dataops/</link>
+      <pubDate>Sat, 12 Feb 2022 08:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/dataops/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>datascience</title>
       <link>https://blog.melio.ai/tags/datascience/</link>
-      <pubDate>Tue, 12 Jan 2021 17:21:36 +0200</pubDate>
+      <pubDate>Sat, 12 Feb 2022 08:00:00 +0200</pubDate>
       
       <guid>https://blog.melio.ai/tags/datascience/</guid>
       <description></description>
@@ -19,7 +28,7 @@
     <item>
       <title>medium</title>
       <link>https://blog.melio.ai/tags/medium/</link>
-      <pubDate>Tue, 12 Jan 2021 17:21:36 +0200</pubDate>
+      <pubDate>Sat, 12 Feb 2022 08:00:00 +0200</pubDate>
       
       <guid>https://blog.melio.ai/tags/medium/</guid>
       <description></description>
@@ -28,7 +37,7 @@
     <item>
       <title>mlops</title>
       <link>https://blog.melio.ai/tags/mlops/</link>
-      <pubDate>Tue, 12 Jan 2021 17:21:36 +0200</pubDate>
+      <pubDate>Sat, 12 Feb 2022 08:00:00 +0200</pubDate>
       
       <guid>https://blog.melio.ai/tags/mlops/</guid>
       <description></description>

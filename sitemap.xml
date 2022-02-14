@@ -2,20 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://blog.melio.ai/five-steps-to-frictionless-ai/</loc>
+    <lastmod>2022-02-12T08:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.melio.ai/tags/dataops/</loc>
+    <lastmod>2022-02-12T08:00:00+02:00</lastmod>
+  </url><url>
     <loc>https://blog.melio.ai/tags/datascience/</loc>
-    <lastmod>2021-01-12T17:21:36+02:00</lastmod>
+    <lastmod>2022-02-12T08:00:00+02:00</lastmod>
   </url><url>
     <loc>https://blog.melio.ai/tags/medium/</loc>
-    <lastmod>2021-01-12T17:21:36+02:00</lastmod>
+    <lastmod>2022-02-12T08:00:00+02:00</lastmod>
   </url><url>
     <loc>https://blog.melio.ai/</loc>
-    <lastmod>2021-01-12T17:21:36+02:00</lastmod>
+    <lastmod>2022-02-12T08:00:00+02:00</lastmod>
   </url><url>
     <loc>https://blog.melio.ai/tags/mlops/</loc>
-    <lastmod>2021-01-12T17:21:36+02:00</lastmod>
+    <lastmod>2022-02-12T08:00:00+02:00</lastmod>
   </url><url>
     <loc>https://blog.melio.ai/tags/</loc>
-    <lastmod>2021-01-12T17:21:36+02:00</lastmod>
+    <lastmod>2022-02-12T08:00:00+02:00</lastmod>
   </url><url>
     <loc>https://blog.melio.ai/what-the-ops/</loc>
     <lastmod>2021-01-12T17:21:36+02:00</lastmod>
