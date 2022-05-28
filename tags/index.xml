@@ -6,31 +6,94 @@
     <description>Recent content in Tags on Melio Consulting</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 12 Jan 2021 17:21:36 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 25 May 2022 00:00:00 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>datascience</title>
-      <link>https://blog.melio.ai/tags/datascience/</link>
-      <pubDate>Tue, 12 Jan 2021 17:21:36 +0200</pubDate>
+      <title>data science</title>
+      <link>https://blog.melio.ai/tags/data-science/</link>
+      <pubDate>Wed, 25 May 2022 00:00:00 +0200</pubDate>
       
-      <guid>https://blog.melio.ai/tags/datascience/</guid>
+      <guid>https://blog.melio.ai/tags/data-science/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>equities</title>
+      <link>https://blog.melio.ai/tags/equities/</link>
+      <pubDate>Wed, 25 May 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/equities/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>forecasting</title>
+      <link>https://blog.melio.ai/tags/forecasting/</link>
+      <pubDate>Wed, 25 May 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/forecasting/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>machine learning</title>
+      <link>https://blog.melio.ai/tags/machine-learning/</link>
+      <pubDate>Wed, 25 May 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/machine-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>medium</title>
       <link>https://blog.melio.ai/tags/medium/</link>
-      <pubDate>Tue, 12 Jan 2021 17:21:36 +0200</pubDate>
+      <pubDate>Wed, 25 May 2022 00:00:00 +0200</pubDate>
       
       <guid>https://blog.melio.ai/tags/medium/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>time series</title>
+      <link>https://blog.melio.ai/tags/time-series/</link>
+      <pubDate>Wed, 25 May 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/time-series/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>datascience</title>
+      <link>https://blog.melio.ai/tags/datascience/</link>
+      <pubDate>Thu, 17 Mar 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/datascience/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>mlops</title>
       <link>https://blog.melio.ai/tags/mlops/</link>
-      <pubDate>Tue, 12 Jan 2021 17:21:36 +0200</pubDate>
+      <pubDate>Thu, 17 Mar 2022 00:00:00 +0200</pubDate>
       
       <guid>https://blog.melio.ai/tags/mlops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>modern data stack</title>
+      <link>https://blog.melio.ai/tags/modern-data-stack/</link>
+      <pubDate>Thu, 17 Mar 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/modern-data-stack/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dataops</title>
+      <link>https://blog.melio.ai/tags/dataops/</link>
+      <pubDate>Sat, 12 Feb 2022 08:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/dataops/</guid>
       <description></description>
     </item>
     
