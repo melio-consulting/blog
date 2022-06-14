@@ -6,7 +6,16 @@
     <description>Recent content in medium on Melio Consulting</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 25 May 2022 00:00:00 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/tags/medium/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Jun 2022 00:00:00 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/tags/medium/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Implementing Custom Authentication in Django</title>
+      <link>https://blog.melio.ai/django-custom-authentication-backends/</link>
+      <pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/django-custom-authentication-backends/</guid>
+      <description>When all other options fail, make your own.</description>
+    </item>
+    
     <item>
       <title>The naivety of ML models and avoiding the naive trap</title>
       <link>https://blog.melio.ai/on-the-naivety-of-ml-models/</link>

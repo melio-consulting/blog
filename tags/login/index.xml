@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>login on Melio Consulting</title>
+    <link>https://blog.melio.ai/tags/login/</link>
+    <description>Recent content in login on Melio Consulting</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 11 Jun 2022 00:00:00 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/tags/login/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Implementing Custom Authentication in Django</title>
+      <link>https://blog.melio.ai/django-custom-authentication-backends/</link>
+      <pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/django-custom-authentication-backends/</guid>
+      <description>When all other options fail, make your own.</description>
+    </item>
+    
+  </channel>
+</rss>

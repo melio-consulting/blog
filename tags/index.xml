@@ -6,7 +6,61 @@
     <description>Recent content in Tags on Melio Consulting</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 25 May 2022 00:00:00 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Jun 2022 00:00:00 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>authentication</title>
+      <link>https://blog.melio.ai/tags/authentication/</link>
+      <pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/authentication/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>django</title>
+      <link>https://blog.melio.ai/tags/django/</link>
+      <pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/django/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>login</title>
+      <link>https://blog.melio.ai/tags/login/</link>
+      <pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/login/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>medium</title>
+      <link>https://blog.melio.ai/tags/medium/</link>
+      <pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/medium/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://blog.melio.ai/tags/python/</link>
+      <pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>webapp</title>
+      <link>https://blog.melio.ai/tags/webapp/</link>
+      <pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/webapp/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>data science</title>
       <link>https://blog.melio.ai/tags/data-science/</link>
@@ -40,15 +94,6 @@
       <pubDate>Wed, 25 May 2022 00:00:00 +0200</pubDate>
       
       <guid>https://blog.melio.ai/tags/machine-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>medium</title>
-      <link>https://blog.melio.ai/tags/medium/</link>
-      <pubDate>Wed, 25 May 2022 00:00:00 +0200</pubDate>
-      
-      <guid>https://blog.melio.ai/tags/medium/</guid>
       <description></description>
     </item>
     
