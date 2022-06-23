@@ -9,7 +9,7 @@
 	<script src="https://kit.fontawesome.com/80436e7b44.js" crossorigin="anonymous"></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="generator" content="Hugo 0.99.0" />
+	<meta name="generator" content="Hugo 0.101.0" />
 	
 	<title>Implementing Custom Authentication in Django</title>
 
@@ -17,14 +17,14 @@
 	
 
 	<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://blog.melio.ai/django-custom-authentication-backends/cover.jpg"/>
+<meta name="twitter:image" content="https://blog.melio.ai/django-custom-authentication-backends/cover.webp"/>
 <meta name="twitter:title" content="Implementing Custom Authentication in Django"/>
 <meta name="twitter:description" content="When all other options fail, make your own."/>
 
 	<meta property="og:title" content="Implementing Custom Authentication in Django" />
 <meta property="og:description" content="When all other options fail, make your own." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.melio.ai/django-custom-authentication-backends/" /><meta property="og:image" content="https://blog.melio.ai/django-custom-authentication-backends/cover.jpg"/><meta property="article:section" content="" />
+<meta property="og:url" content="https://blog.melio.ai/django-custom-authentication-backends/" /><meta property="og:image" content="https://blog.melio.ai/django-custom-authentication-backends/cover.webp"/><meta property="article:section" content="" />
 <meta property="article:published_time" content="2022-06-11T00:00:00+02:00" />
 <meta property="article:modified_time" content="2022-06-11T00:00:00+02:00" />
 
@@ -83,8 +83,17 @@
                         <a class="dropdown-item" href="https://github.com/melio-consulting">Open Source</a>
                     </div>
                 </li>
-                <li class="nav-item pl-3">
-                    <a class="nav-link" href="https://melio.ai/#who-we-are">Our Team</a>
+                <li class="nav-item dropdown pl-3"><a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLinkCommunity" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Success</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkCommunity" style="background-color: rgba(255, 255, 255, 0.80);">
+                        <a class="dropdown-item" href="https://melio.ai/use-cases-html">Use Cases</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown pl-3"><a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLinkCommunity" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Our Team</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkCommunity" style="background-color: rgba(255, 255, 255, 0.80);">
+                        
+                        <a class="dropdown-item" href="https://melio.ai/our-team">Our Team</a>
+                        <a class="dropdown-item" href="https://melio.ai/careers">Careers</a>
+                    </div>
                 </li>
                 <li class="nav-item pl-3">
                     <a class="nav-link" href="/">Blog</a>
@@ -168,7 +177,7 @@
 
 <figure >
     
-        <img class="center" src="cover.jpg"  />
+        <img class="center" src="cover.webp"  />
     
     
     <figcaption>
@@ -270,7 +279,7 @@ As a way of example, I am just going to do an in-memory authentication, so I wil
 
 <figure >
     
-        <img class="center" src="rocket_ship.png"  />
+        <img class="center" src="rocket_ship.webp"  />
     
     
     <figcaption>
@@ -340,7 +349,7 @@ You should see a beautiful login form:</p>
 
 <figure >
     
-        <img class="center" src="login.png"  />
+        <img class="center" src="login.webp"  />
     
     
     <figcaption>
