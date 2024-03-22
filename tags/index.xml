@@ -6,7 +6,43 @@
     <description>Recent content in Tags on Melio Consulting</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Jun 2022 00:00:00 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Mar 2024 00:00:00 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ai</title>
+      <link>https://blog.melio.ai/tags/ai/</link>
+      <pubDate>Thu, 21 Mar 2024 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/ai/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>business</title>
+      <link>https://blog.melio.ai/tags/business/</link>
+      <pubDate>Thu, 21 Mar 2024 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/business/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mlops</title>
+      <link>https://blog.melio.ai/tags/mlops/</link>
+      <pubDate>Thu, 21 Mar 2024 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/mlops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>time-to-value</title>
+      <link>https://blog.melio.ai/tags/time-to-value/</link>
+      <pubDate>Thu, 21 Mar 2024 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/tags/time-to-value/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>authentication</title>
       <link>https://blog.melio.ai/tags/authentication/</link>
@@ -112,15 +148,6 @@
       <pubDate>Thu, 17 Mar 2022 00:00:00 +0200</pubDate>
       
       <guid>https://blog.melio.ai/tags/datascience/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>mlops</title>
-      <link>https://blog.melio.ai/tags/mlops/</link>
-      <pubDate>Thu, 17 Mar 2022 00:00:00 +0200</pubDate>
-      
-      <guid>https://blog.melio.ai/tags/mlops/</guid>
       <description></description>
     </item>
     

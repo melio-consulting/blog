@@ -6,7 +6,16 @@
     <description>Recent content on Melio Consulting</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Jun 2022 00:00:00 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Mar 2024 00:00:00 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Accelerating AI/ML Value: Transforming Investment to Impact</title>
+      <link>https://blog.melio.ai/ai-time-to-value/</link>
+      <pubDate>Thu, 21 Mar 2024 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.melio.ai/ai-time-to-value/</guid>
+      <description>Explore how to derive business impact, competitive advantage, and enhanced decision-making from AI/ML, and learn how to tackle the common challenges in achieving rapid time-to-value.</description>
+    </item>
+    
     <item>
       <title>Implementing Custom Authentication in Django</title>
       <link>https://blog.melio.ai/django-custom-authentication-backends/</link>
