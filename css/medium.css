@@ -204,8 +204,14 @@ section.recent-posts {
 }
 
 .toc ul {
-    list-style: decimal;
+    /* list-style: decimal; */
     font-weight: 400;
+    text-align: left;
+}
+
+.toc a {
+    color: rgba(0, 0, 0, .44);
+    fill: rgba(0, 0, 0, .44);
 }
 
 .author-meta {
@@ -382,6 +388,11 @@ blockquote {
 
 .sticky-top-offset {
     top: 100px;
+    position: sticky;
+    position: -webkit-sticky;
+    z-index: 800;
+    overflow-y: auto;
+    max-height: calc(100vh - 100px);
 }
 
 @media (min-width:1024px) {

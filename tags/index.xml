@@ -4,170 +4,142 @@
     <title>Tags on Melio Consulting</title>
     <link>https://blog.melio.ai/tags/</link>
     <description>Recent content in Tags on Melio Consulting</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 21 Mar 2024 00:00:00 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Oct 2024 00:00:00 +0200</lastBuildDate>
+    <atom:link href="https://blog.melio.ai/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>ai</title>
+      <title>Ai</title>
       <link>https://blog.melio.ai/tags/ai/</link>
-      <pubDate>Thu, 21 Mar 2024 00:00:00 +0200</pubDate>
-      
+      <pubDate>Wed, 23 Oct 2024 00:00:00 +0200</pubDate>
       <guid>https://blog.melio.ai/tags/ai/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>business</title>
-      <link>https://blog.melio.ai/tags/business/</link>
-      <pubDate>Thu, 21 Mar 2024 00:00:00 +0200</pubDate>
-      
-      <guid>https://blog.melio.ai/tags/business/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>mlops</title>
+      <title>Mlops</title>
       <link>https://blog.melio.ai/tags/mlops/</link>
-      <pubDate>Thu, 21 Mar 2024 00:00:00 +0200</pubDate>
-      
+      <pubDate>Wed, 23 Oct 2024 00:00:00 +0200</pubDate>
       <guid>https://blog.melio.ai/tags/mlops/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>time-to-value</title>
+      <title>Technical</title>
+      <link>https://blog.melio.ai/tags/technical/</link>
+      <pubDate>Wed, 23 Oct 2024 00:00:00 +0200</pubDate>
+      <guid>https://blog.melio.ai/tags/technical/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Business</title>
+      <link>https://blog.melio.ai/tags/business/</link>
+      <pubDate>Thu, 21 Mar 2024 00:00:00 +0200</pubDate>
+      <guid>https://blog.melio.ai/tags/business/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Time-to-Value</title>
       <link>https://blog.melio.ai/tags/time-to-value/</link>
       <pubDate>Thu, 21 Mar 2024 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/tags/time-to-value/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>authentication</title>
+      <title>Authentication</title>
       <link>https://blog.melio.ai/tags/authentication/</link>
       <pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/tags/authentication/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>django</title>
+      <title>Django</title>
       <link>https://blog.melio.ai/tags/django/</link>
       <pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/tags/django/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>login</title>
+      <title>Login</title>
       <link>https://blog.melio.ai/tags/login/</link>
       <pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/tags/login/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>medium</title>
+      <title>Medium</title>
       <link>https://blog.melio.ai/tags/medium/</link>
       <pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/tags/medium/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>python</title>
+      <title>Python</title>
       <link>https://blog.melio.ai/tags/python/</link>
       <pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/tags/python/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>webapp</title>
+      <title>Webapp</title>
       <link>https://blog.melio.ai/tags/webapp/</link>
       <pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/tags/webapp/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>data science</title>
+      <title>Data Science</title>
       <link>https://blog.melio.ai/tags/data-science/</link>
       <pubDate>Wed, 25 May 2022 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/tags/data-science/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>equities</title>
+      <title>Equities</title>
       <link>https://blog.melio.ai/tags/equities/</link>
       <pubDate>Wed, 25 May 2022 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/tags/equities/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>forecasting</title>
+      <title>Forecasting</title>
       <link>https://blog.melio.ai/tags/forecasting/</link>
       <pubDate>Wed, 25 May 2022 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/tags/forecasting/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>machine learning</title>
+      <title>Machine Learning</title>
       <link>https://blog.melio.ai/tags/machine-learning/</link>
       <pubDate>Wed, 25 May 2022 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/tags/machine-learning/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>time series</title>
+      <title>Time Series</title>
       <link>https://blog.melio.ai/tags/time-series/</link>
       <pubDate>Wed, 25 May 2022 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/tags/time-series/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>datascience</title>
+      <title>Datascience</title>
       <link>https://blog.melio.ai/tags/datascience/</link>
       <pubDate>Thu, 17 Mar 2022 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/tags/datascience/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>modern data stack</title>
+      <title>Modern Data Stack</title>
       <link>https://blog.melio.ai/tags/modern-data-stack/</link>
       <pubDate>Thu, 17 Mar 2022 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/tags/modern-data-stack/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>dataops</title>
+      <title>Dataops</title>
       <link>https://blog.melio.ai/tags/dataops/</link>
       <pubDate>Sat, 12 Feb 2022 08:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/tags/dataops/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

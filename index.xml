@@ -4,71 +4,65 @@
     <title>Melio Consulting</title>
     <link>https://blog.melio.ai/</link>
     <description>Recent content on Melio Consulting</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 21 Mar 2024 00:00:00 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Oct 2024 00:00:00 +0200</lastBuildDate>
+    <atom:link href="https://blog.melio.ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mastering MLOps: 8 Principles to deliver Reliable Machine Learning</title>
+      <link>https://blog.melio.ai/8-mlops-principles/</link>
+      <pubDate>Wed, 23 Oct 2024 00:00:00 +0200</pubDate>
+      <guid>https://blog.melio.ai/8-mlops-principles/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Take your machine learning from zero to hero with 8 essential MLOps principles—boost efficiency, ensure reliability, and build AI systems that are scalable, ethical, and impactful&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Accelerating AI/ML Value: Transforming Investment to Impact</title>
       <link>https://blog.melio.ai/ai-time-to-value/</link>
       <pubDate>Thu, 21 Mar 2024 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/ai-time-to-value/</guid>
-      <description>Explore how to derive business impact, competitive advantage, and enhanced decision-making from AI/ML, and learn how to tackle the common challenges in achieving rapid time-to-value.</description>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Explore how to derive business impact, competitive advantage, and enhanced decision-making from AI/ML, and learn how to tackle the common challenges in achieving rapid time-to-value.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Implementing Custom Authentication in Django</title>
       <link>https://blog.melio.ai/django-custom-authentication-backends/</link>
       <pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/django-custom-authentication-backends/</guid>
-      <description>When all other options fail, make your own.</description>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;When all other options fail, make your own.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>The naivety of ML models and avoiding the naive trap</title>
       <link>https://blog.melio.ai/on-the-naivety-of-ml-models/</link>
       <pubDate>Wed, 25 May 2022 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/on-the-naivety-of-ml-models/</guid>
-      <description>When machine learning models learn to be dumb.</description>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;When machine learning models learn to be dumb.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>What&#39;s so modern about the modern data stack?</title>
       <link>https://blog.melio.ai/whats-so-modern-about-mds/</link>
       <pubDate>Thu, 17 Mar 2022 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/whats-so-modern-about-mds/</guid>
-      <description>See how much more the modern data stack can do for your organisation when employed the right way.</description>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;See how much more the modern data stack can do for your organisation when employed the right way.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>5 Steps to Frictionless AI</title>
       <link>https://blog.melio.ai/five-steps-to-frictionless-ai/</link>
       <pubDate>Sat, 12 Feb 2022 08:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/five-steps-to-frictionless-ai/</guid>
-      <description>Let&amp;rsquo;s finally make AI do the work for us instead of fighting with it.</description>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Let&amp;rsquo;s finally make AI do the work for us instead of fighting with it.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>What the Ops are you talking about?</title>
       <link>https://blog.melio.ai/what-the-ops/</link>
-      <pubDate>Tue, 12 Jan 2021 17:21:36 +0200</pubDate>
-      
+      <pubDate>Sun, 12 Jan 2020 17:21:36 +0200</pubDate>
       <guid>https://blog.melio.ai/what-the-ops/</guid>
-      <description>How to choose between DataOps vs MLOps vs AIOps - what are the right Ops for your big data team?</description>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;How to choose between DataOps vs MLOps vs AIOps - what are the right Ops for your big data team?&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Launching Into Uncertainty - 6 Smart Steps to Future-Proof Your ML Models</title>
       <link>https://blog.melio.ai/launching-into-uncertainty/</link>
       <pubDate>Fri, 22 May 2020 17:21:36 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/launching-into-uncertainty/</guid>
-      <description>Your machine learning model is going to fail in the pandemic.</description>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Your machine learning model is going to fail in the pandemic. Here&amp;rsquo;s how to mitigate the damage.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>python on Melio Consulting</title>
+    <title>Python on Melio Consulting</title>
     <link>https://blog.melio.ai/tags/python/</link>
-    <description>Recent content in python on Melio Consulting</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Python on Melio Consulting</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Jun 2022 00:00:00 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Jun 2022 00:00:00 +0200</lastBuildDate>
+    <atom:link href="https://blog.melio.ai/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Implementing Custom Authentication in Django</title>
       <link>https://blog.melio.ai/django-custom-authentication-backends/</link>
       <pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate>
-      
       <guid>https://blog.melio.ai/django-custom-authentication-backends/</guid>
-      <description>When all other options fail, make your own.</description>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;When all other options fail, make your own.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

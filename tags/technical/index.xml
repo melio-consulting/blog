@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ai on Melio Consulting</title>
-    <link>https://blog.melio.ai/tags/ai/</link>
-    <description>Recent content in Ai on Melio Consulting</description>
+    <title>Technical on Melio Consulting</title>
+    <link>https://blog.melio.ai/tags/technical/</link>
+    <description>Recent content in Technical on Melio Consulting</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 23 Oct 2024 00:00:00 +0200</lastBuildDate>
-    <atom:link href="https://blog.melio.ai/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.melio.ai/tags/technical/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mastering MLOps: 8 Principles to deliver Reliable Machine Learning</title>
       <link>https://blog.melio.ai/8-mlops-principles/</link>
       <pubDate>Wed, 23 Oct 2024 00:00:00 +0200</pubDate>
       <guid>https://blog.melio.ai/8-mlops-principles/</guid>
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Take your machine learning from zero to hero with 8 essential MLOps principles—boost efficiency, ensure reliability, and build AI systems that are scalable, ethical, and impactful&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Accelerating AI/ML Value: Transforming Investment to Impact</title>
-      <link>https://blog.melio.ai/ai-time-to-value/</link>
-      <pubDate>Thu, 21 Mar 2024 00:00:00 +0200</pubDate>
-      <guid>https://blog.melio.ai/ai-time-to-value/</guid>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Explore how to derive business impact, competitive advantage, and enhanced decision-making from AI/ML, and learn how to tackle the common challenges in achieving rapid time-to-value.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
