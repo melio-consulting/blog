@@ -1,19 +1,2 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Technical on Melio Consulting</title>
-    <link>https://blog.melio.ai/tags/technical/</link>
-    <description>Recent content in Technical on Melio Consulting</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 23 Oct 2024 00:00:00 +0200</lastBuildDate>
-    <atom:link href="https://blog.melio.ai/tags/technical/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Mastering MLOps: 8 Principles to deliver Reliable Machine Learning</title>
-      <link>https://blog.melio.ai/8-mlops-principles/</link>
-      <pubDate>Wed, 23 Oct 2024 00:00:00 +0200</pubDate>
-      <guid>https://blog.melio.ai/8-mlops-principles/</guid>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Take your machine learning from zero to hero with 8 essential MLOps principles—boost efficiency, ensure reliability, and build AI systems that are scalable, ethical, and impactful&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Technical on Melio Consulting</title><link>https://blog.melio.ai/tags/technical/</link><description>Recent content in Technical on Melio Consulting</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 23 Oct 2024 00:00:00 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/tags/technical/index.xml" rel="self" type="application/rss+xml"/><item><title>Mastering MLOps: 8 Principles to deliver Reliable Machine Learning</title><link>https://blog.melio.ai/8-mlops-principles/</link><pubDate>Wed, 23 Oct 2024 00:00:00 +0200</pubDate><guid>https://blog.melio.ai/8-mlops-principles/</guid><description>&lt;blockquote>
+&lt;p>Take your machine learning from zero to hero with 8 essential MLOps principles—boost efficiency, ensure reliability, and build AI systems that are scalable, ethical, and impactful&lt;/p></description></item></channel></rss>

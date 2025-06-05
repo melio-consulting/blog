@@ -1,19 +1,2 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Django on Melio Consulting</title>
-    <link>https://blog.melio.ai/tags/django/</link>
-    <description>Recent content in Django on Melio Consulting</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 11 Jun 2022 00:00:00 +0200</lastBuildDate>
-    <atom:link href="https://blog.melio.ai/tags/django/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Implementing Custom Authentication in Django</title>
-      <link>https://blog.melio.ai/django-custom-authentication-backends/</link>
-      <pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate>
-      <guid>https://blog.melio.ai/django-custom-authentication-backends/</guid>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;When all other options fail, make your own.&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Django on Melio Consulting</title><link>https://blog.melio.ai/tags/django/</link><description>Recent content in Django on Melio Consulting</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sat, 11 Jun 2022 00:00:00 +0200</lastBuildDate><atom:link href="https://blog.melio.ai/tags/django/index.xml" rel="self" type="application/rss+xml"/><item><title>Implementing Custom Authentication in Django</title><link>https://blog.melio.ai/django-custom-authentication-backends/</link><pubDate>Sat, 11 Jun 2022 00:00:00 +0200</pubDate><guid>https://blog.melio.ai/django-custom-authentication-backends/</guid><description>&lt;blockquote>
+&lt;p>When all other options fail, make your own.&lt;/p></description></item></channel></rss>

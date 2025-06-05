@@ -1,586 +1,218 @@
-<!DOCTYPE html>
-<html lang="en-us"><head>
-	
-	
-	
-	
-	<html class="no-js" lang="">
-	
-	<script src="https://kit.fontawesome.com/80436e7b44.js" crossorigin="anonymous"></script>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="generator" content="Hugo 0.136.5">
-	
-	<title>Implementing Custom Authentication in Django</title>
-
-	
-	
-
-	
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://blog.melio.ai/django-custom-authentication-backends/cover.webp">
-  <meta name="twitter:title" content="Implementing Custom Authentication in Django">
-  <meta name="twitter:description" content="When all other options fail, make your own.">
-
-	<meta property="og:url" content="https://blog.melio.ai/django-custom-authentication-backends/">
-  <meta property="og:site_name" content="Melio Consulting">
-  <meta property="og:title" content="Implementing Custom Authentication in Django">
-  <meta property="og:description" content="When all other options fail, make your own.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:published_time" content="2022-06-11T00:00:00+02:00">
-    <meta property="article:modified_time" content="2022-06-11T00:00:00+02:00">
-    <meta property="article:tag" content="Medium">
-    <meta property="article:tag" content="Django">
-    <meta property="article:tag" content="Python">
-    <meta property="article:tag" content="Authentication">
-    <meta property="article:tag" content="Login">
-    <meta property="article:tag" content="Webapp">
-    <meta property="og:image" content="https://blog.melio.ai/django-custom-authentication-backends/cover.webp">
-
-
-	
-	<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
-		integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
-		rel="stylesheet">
-	<link href="/css/medium.css" rel="stylesheet">
-	<link href="/css/additional.css" rel="stylesheet">
-
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link href="/css/main.css" rel="stylesheet">
-	
-
-	
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-488W4K7EG7"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-
-		function gtag() {
-			dataLayer.push(arguments);
-		}
-		gtag('js', new Date());
-
-		gtag('config', 'G-488W4K7EG7');
-	</script>
-</head><body>
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #154c57; min-height: 80px;" data-home="true" role="navigation">
-    <div class="container">
-        <a class="navbar-brand" href="/" style="height: 80px; line-height: 80px; padding: 0;"><img src="/images/logo-long-dark.png" alt="logo" data-rjs="2"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 text-center">
-                <li class="nav-item pl-3">
-                    <a class="nav-link" href="https://melio.ai/#what-we-do">What We Do </a>
-                </li>
-                <li class="nav-item dropdown pl-3"><a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Offerings</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background-color: rgba(255, 255, 255, 0.80);">
-                        <a class="dropdown-item" href="https://melio.ai/how">Consulting</a>
-                        <a class="dropdown-item" href="https://melio.ai/training">Training</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown pl-3"><a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLinkCommunity" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contributions</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkCommunity" style="background-color: rgba(255, 255, 255, 0.80);">
-                        <a class="dropdown-item" href="https://melio.ai/events">Events</a>
-                        <a class="dropdown-item" href="https://github.com/melio-consulting">Open Source</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown pl-3"><a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLinkCommunity" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Success</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkCommunity" style="background-color: rgba(255, 255, 255, 0.80);">
-                        <a class="dropdown-item" href="https://melio.ai/use-cases-html">Use Cases</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown pl-3"><a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLinkCommunity" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Our Team</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkCommunity" style="background-color: rgba(255, 255, 255, 0.80);">
-                        
-                        <a class="dropdown-item" href="https://melio.ai/our-team">Our Team</a>
-                        <a class="dropdown-item" href="https://melio.ai/careers">Careers</a>
-                    </div>
-                </li>
-                <li class="nav-item pl-3">
-                    <a class="nav-link" href="/">Blog</a>
-                </li>
-                <li class="nav-item pl-3">
-                    <a class="nav-link" href="https://melio.ai/#contact-us">Contact Us</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-        <div class="site-content">   
-            <div class="container">
-    
-    <div class="main-content">
-        
-        <div class="container">
-            <div class="row">
-                
-                <div class="col-md-3 pl-0">
-                    <div class="sticky-top-offset">
-                        
-                        
-                        
-                        
-                    </div>
-                </div>
-                
-                <div class="col-md-9 flex-first flex-md-unordered">
-                    <div class="mainheading">
-                        
-                        <div class="row post-top-meta">
-                            <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left md-nopad-left">
-                                <span class="author-description">
-                                    <i class="far fa-star"></i>
-                                    Jun 11, 2022
-                                    <i class="far fa-clock clock"></i>
-                                    8 min read &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <i class="fa fa-user-circle-o"></i>
-                                    Bradley Marques &lt;bradley@melio.ai&gt; 
-                                </span>
-                            </div>
-                        </div>
-                        
-                        <h1 class="posttitle">Implementing Custom Authentication in Django</h1>
-                    </div>
-
-                    
-                    
-                    
-                        
-                    
-                    
-
-                    
-                    <div class="article-post">
-                        <blockquote>
-<p>When all other options fail, make your own.</p>
-</blockquote>
-
-<figure >
-    
-        <img class="center" src="cover.webp"  />
-    
-    
-    <figcaption>
-        <h6>Photo by pch.vector from Freepik.</h6>
-        
-    </figcaption>
-    
-</figure>
-
-<h2 id="introduction">Introduction</h2>
-<p>This tutorial will take you from absolute zero to a fully-working custom authentication system in Django.</p>
-<p>Django comes with built-in authentication backends that make it really easy to get started and meet most projects&rsquo; needs. There are also a slew of Django apps (such as <a href="https://django-allauth.readthedocs.io/">django-allauth</a>) that have been written to integrate with identity providers such as Google and GitHub.</p>
-<p>But what do you do when even these don&rsquo;t meet your needs?</p>
-<p>For example, I was recently attempting to integrate a Django application with a Keycloak backend, and found that existing libraries such as:</p>
-<ol>
-<li><a href="https://django-keycloak.readthedocs.io/en/latest/">django-keycloak</a></li>
-<li><a href="https://github.com/marcelo225/django-keycloak-auth">django-keycloak-auth</a></li>
-<li><a href="https://django-allauth.readthedocs.io/">django-allauth</a></li>
-</ol>
-<p>either did not work as advertised (though PEBKAC errors are not unlikely here) or did not work in exactly the way I needed.
+<!doctype html><html lang=en-us><head><html class=no-js lang><script src=https://kit.fontawesome.com/80436e7b44.js crossorigin=anonymous></script><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=generator content="Hugo 0.147.2"><title>Implementing Custom Authentication in Django</title>
+<meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://blog.melio.ai/django-custom-authentication-backends/cover.webp"><meta name=twitter:title content="Implementing Custom Authentication in Django"><meta name=twitter:description content="When all other options fail, make your own."><meta property="og:url" content="https://blog.melio.ai/django-custom-authentication-backends/"><meta property="og:site_name" content="Melio Consulting"><meta property="og:title" content="Implementing Custom Authentication in Django"><meta property="og:description" content="When all other options fail, make your own."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:published_time" content="2022-06-11T00:00:00+02:00"><meta property="article:modified_time" content="2022-06-11T00:00:00+02:00"><meta property="article:tag" content="Medium"><meta property="article:tag" content="Django"><meta property="article:tag" content="Python"><meta property="article:tag" content="Authentication"><meta property="article:tag" content="Login"><meta property="article:tag" content="Webapp"><meta property="og:image" content="https://blog.melio.ai/django-custom-authentication-backends/cover.webp"><link rel=icon type=image/x-icon href=/images/favicon.ico><link href=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css rel=stylesheet integrity=sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T crossorigin=anonymous><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.0.13/css/all.css integrity=sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp crossorigin=anonymous><link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel=stylesheet><link href=/css/medium.css rel=stylesheet><link href=/css/additional.css rel=stylesheet><link href=https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css rel=stylesheet integrity=sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh crossorigin=anonymous><link href=/css/main.css rel=stylesheet><script async src="https://www.googletagmanager.com/gtag/js?id=G-488W4K7EG7"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-488W4K7EG7")</script></head><body><nav class="navbar navbar-expand-lg navbar-dark sticky-top" style=background-color:#154c57;min-height:80px role=navigation><div class=container><a class=navbar-brand href=https://melio.ai style=height:80px;line-height:80px;padding:0><img src=/images/logo-long-dark.webp alt=logo data-rjs=2></a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarTogglerDemo01 aria-controls=navbarTogglerDemo01 aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarTogglerDemo01><ul class="navbar-nav ml-auto mt-2 mt-lg-0 text-center"><li class="nav-item pl-3"><a class=nav-link href=https://melio.ai/#what-we-do>What We Do</a></li><li class="nav-item dropdown pl-3"><a href=# class="nav-link dropdown-toggle" id=navbarDropdownMenuLink data-toggle=dropdown aria-haspopup=true aria-expanded=false>Offerings</a><div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink style=background-color:rgba(255,255,255,.8)><a class=dropdown-item href=https://melio.ai/how>Consulting</a>
+<a class=dropdown-item href=https://melio.ai/fluid-maturity>FLUID Maturity Assessments</a>
+<a class=dropdown-item href=https://melio.ai/training>Training</a>
+<a class=dropdown-item href=https://melio.ai/use-cases-html>Use Cases</a></div></li><li class="nav-item dropdown pl-3"><a href=# class="nav-link dropdown-toggle" id=navbarDropdownMenuLinkCommunity data-toggle=dropdown aria-haspopup=true aria-expanded=false>Contributions</a><div class=dropdown-menu aria-labelledby=navbarDropdownMenuLinkCommunity style=background-color:rgba(255,255,255,.8)><a class=dropdown-item href=https://melio.ai/events>Events</a>
+<a class=dropdown-item href=https://github.com/melio-consulting>Open Source</a></div></li><li class="nav-item dropdown pl-3"><a href=# class="nav-link dropdown-toggle" id=navbarDropdownMenuLinkCommunity data-toggle=dropdown aria-haspopup=true aria-expanded=false>Success</a><div class=dropdown-menu aria-labelledby=navbarDropdownMenuLinkCommunity style=background-color:rgba(255,255,255,.8)><a class=dropdown-item href=https://melio.ai/success-stories-html>Success Stories</a></div></li><li class="nav-item dropdown pl-3"><a href=# class="nav-link dropdown-toggle" id=navbarDropdownMenuLinkCommunity data-toggle=dropdown aria-haspopup=true aria-expanded=false>Our Team</a><div class=dropdown-menu aria-labelledby=navbarDropdownMenuLinkCommunity style=background-color:rgba(255,255,255,.8)><a class=dropdown-item href=https://melio.ai/our-team>Our Team</a>
+<a class=dropdown-item href=https://melio.ai/careers>Careers</a></div></li><li class="nav-item pl-3"><a class=nav-link href=/>Blog</a></li><li class="nav-item pl-3"><a class=nav-link href=https://melio.ai/#contact-us>Contact Us</a></li></ul></div></div></nav><div class=site-content><div class=container><div class=main-content><div class=container><div class=row><div class="col-md-3 pl-0"><div class=sticky-top-offset></div></div><div class="col-md-9 flex-first flex-md-unordered"><div class=mainheading><div class="row post-top-meta"><div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left md-nopad-left"><span class=author-description><i class="far fa-star"></i>
+Jun 11, 2022
+<i class="far fa-clock clock"></i>
+8 min read &nbsp;&nbsp;&nbsp;&nbsp;
+<i class="fa fa-user-circle-o"></i>
+Bradley Marques &lt;bradley@melio.ai></span></div></div><h1 class=posttitle>Implementing Custom Authentication in Django</h1></div><div class=article-post><blockquote><p>When all other options fail, make your own.</p></blockquote><figure><img class=center src=cover.webp><figcaption><h6>Photo by pch.vector from Freepik.</h6></figcaption></figure><h2 id=introduction>Introduction</h2><p>This tutorial will take you from absolute zero to a fully-working custom authentication system in Django.</p><p>Django comes with built-in authentication backends that make it really easy to get started and meet most projects&rsquo; needs. There are also a slew of Django apps (such as <a href=https://django-allauth.readthedocs.io/>django-allauth</a>) that have been written to integrate with identity providers such as Google and GitHub.</p><p>But what do you do when even these don&rsquo;t meet your needs?</p><p>For example, I was recently attempting to integrate a Django application with a Keycloak backend, and found that existing libraries such as:</p><ol><li><a href=https://django-keycloak.readthedocs.io/en/latest/>django-keycloak</a></li><li><a href=https://github.com/marcelo225/django-keycloak-auth>django-keycloak-auth</a></li><li><a href=https://django-allauth.readthedocs.io/>django-allauth</a></li></ol><p>either did not work as advertised (though PEBKAC errors are not unlikely here) or did not work in exactly the way I needed.
 My only option was creating my own custom authentication backend.
-This sounds like a complicated thing to do, but is actually really simple.</p>
-<p>I&rsquo;ve included a TL;DR right up front if you already know a bit about Django.
-The code is also <a href="https://github.com/bradleymarques/custom-authentication-backend-django">on GitHub</a>.</p>
-<h2 id="tldr---just-gimme-the-answer">TL;DR - Just Gimme the Answer</h2>
-<p>In a rush? Here&rsquo;s the answer:</p>
-<h3 id="settingspy">settings.py</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e"># ./mysite/settings.py</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>INSTALLED_APPS <span style="color:#f92672">=</span> [
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ... other apps</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;django.contrib.auth&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ... other apps</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;my_custom_authentication&#34;</span>,  <span style="color:#75715e"># Or whatever your app is called</span>
-</span></span><span style="display:flex;"><span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># ...</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>AUTHENTICATION_BACKENDS <span style="color:#f92672">=</span> [
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;my_custom_authentication.backends.MyCustomAuthenticationBackend&#34;</span>,
-</span></span><span style="display:flex;"><span>]
-</span></span></code></pre></div><h3 id="my_custom_authentication_backendpy">my_custom_authentication_backend.py</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e"># ./my_custom_authentication/backends/my_custom_authentication_backend.py</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> django.contrib.auth.backends <span style="color:#f92672">import</span> BaseBackend
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> django.contrib.auth <span style="color:#f92672">import</span> get_user_model <span style="color:#75715e"># Important for custom User objects</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyCustomAuthenticationBackend</span>(BaseBackend):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">authenticate</span>(self, request, username<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, password<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
-</span></span><span style="display:flex;"><span>        user <span style="color:#f92672">=</span> <span style="color:#75715e"># ... some custom logic such as an API call to an identity provider</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Return None if authentication fails, or a User object if authentication succeeds</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> user <span style="color:#f92672">or</span> <span style="color:#66d9ef">None</span>
-</span></span></code></pre></div><p>If the above doesn&rsquo;t make much sense, follow the complete tutorial below:</p>
-<h2 id="starting-the-application">Starting the application</h2>
-<h3 id="poetry">Poetry</h3>
-<p>Let&rsquo;s start by creating a <a href="https://python-poetry.org/">Poetry</a> (you could simply
+This sounds like a complicated thing to do, but is actually really simple.</p><p>I&rsquo;ve included a TL;DR right up front if you already know a bit about Django.
+The code is also <a href=https://github.com/bradleymarques/custom-authentication-backend-django>on GitHub</a>.</p><h2 id=tldr---just-gimme-the-answer>TL;DR - Just Gimme the Answer</h2><p>In a rush? Here&rsquo;s the answer:</p><h3 id=settingspy>settings.py</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e># ./mysite/settings.py</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>INSTALLED_APPS <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>    <span style=color:#75715e># ... other apps</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;django.contrib.auth&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#75715e># ... other apps</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;my_custom_authentication&#34;</span>,  <span style=color:#75715e># Or whatever your app is called</span>
+</span></span><span style=display:flex><span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># ...</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>AUTHENTICATION_BACKENDS <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;my_custom_authentication.backends.MyCustomAuthenticationBackend&#34;</span>,
+</span></span><span style=display:flex><span>]
+</span></span></code></pre></div><h3 id=my_custom_authentication_backendpy>my_custom_authentication_backend.py</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e># ./my_custom_authentication/backends/my_custom_authentication_backend.py</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> django.contrib.auth.backends <span style=color:#f92672>import</span> BaseBackend
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> django.contrib.auth <span style=color:#f92672>import</span> get_user_model <span style=color:#75715e># Important for custom User objects</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyCustomAuthenticationBackend</span>(BaseBackend):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>authenticate</span>(self, request, username<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, password<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>):
+</span></span><span style=display:flex><span>        user <span style=color:#f92672>=</span> <span style=color:#75715e># ... some custom logic such as an API call to an identity provider</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Return None if authentication fails, or a User object if authentication succeeds</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> user <span style=color:#f92672>or</span> <span style=color:#66d9ef>None</span>
+</span></span></code></pre></div><p>If the above doesn&rsquo;t make much sense, follow the complete tutorial below:</p><h2 id=starting-the-application>Starting the application</h2><h3 id=poetry>Poetry</h3><p>Let&rsquo;s start by creating a <a href=https://python-poetry.org/>Poetry</a> (you could simply
 use <code>pip</code> if you prefer) configuration file for the project. If not installed,
-please <a href="https://python-poetry.org/docs/#installation">install Poetry</a>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>poetry init
+please <a href=https://python-poetry.org/docs/#installation>install Poetry</a>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>poetry init
 </span></span></code></pre></div><p>Fill in your details, and choose to not define your dependencies interactively.
 Once complete, open the <code>pyproject.toml</code> file and ensure that it has content
-similar to:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">tool</span>.<span style="color:#a6e22e">poetry</span>]
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;your-application-name-here&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">version</span> = <span style="color:#e6db74">&#34;0.1.0&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">description</span> = <span style="color:#e6db74">&#34;&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">authors</span> = [<span style="color:#e6db74">&#34;Your Name &lt;your-email@example.com&gt;&#34;</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">tool</span>.<span style="color:#a6e22e">poetry</span>.<span style="color:#a6e22e">dependencies</span>]
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">python</span> = <span style="color:#e6db74">&#34;^3.10&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Django</span> = <span style="color:#e6db74">&#34;^4.0.5&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">tool</span>.<span style="color:#a6e22e">poetry</span>.<span style="color:#a6e22e">dev-dependencies</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">build-system</span>]
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">requires</span> = [<span style="color:#e6db74">&#34;poetry-core&gt;=1.0.0&#34;</span>]
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">build-backend</span> = <span style="color:#e6db74">&#34;poetry.core.masonry.api&#34;</span>
-</span></span></code></pre></div><p>Then open up a Poetry virtual environment and install the dependencies in it:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>poetry shell
-</span></span><span style="display:flex;"><span>poetry install
-</span></span><span style="display:flex;"><span>poetry update
-</span></span></code></pre></div><p>Check the installation of Django:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>python -m django --version
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4.0.5</span>
-</span></span></code></pre></div><h3 id="starting-the-django-project-and-app">Starting the Django Project and App</h3>
-<p>If you don&rsquo;t already know, Django has the concept of &ldquo;projects&rdquo; and pluggable &ldquo;apps&rdquo; that you install into the project.
-Let&rsquo;s start the project by running:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>django-admin startproject mysite .
-</span></span></code></pre></div><p>Note the trailing dot in the above command.</p>
-<p>Now we can go ahead and create the django app.
+similar to:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-toml data-lang=toml><span style=display:flex><span>[<span style=color:#a6e22e>tool</span>.<span style=color:#a6e22e>poetry</span>]
+</span></span><span style=display:flex><span><span style=color:#a6e22e>name</span> = <span style=color:#e6db74>&#34;your-application-name-here&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>version</span> = <span style=color:#e6db74>&#34;0.1.0&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>description</span> = <span style=color:#e6db74>&#34;&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>authors</span> = [<span style=color:#e6db74>&#34;Your Name &lt;your-email@example.com&gt;&#34;</span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[<span style=color:#a6e22e>tool</span>.<span style=color:#a6e22e>poetry</span>.<span style=color:#a6e22e>dependencies</span>]
+</span></span><span style=display:flex><span><span style=color:#a6e22e>python</span> = <span style=color:#e6db74>&#34;^3.10&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Django</span> = <span style=color:#e6db74>&#34;^4.0.5&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[<span style=color:#a6e22e>tool</span>.<span style=color:#a6e22e>poetry</span>.<span style=color:#a6e22e>dev-dependencies</span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[<span style=color:#a6e22e>build-system</span>]
+</span></span><span style=display:flex><span><span style=color:#a6e22e>requires</span> = [<span style=color:#e6db74>&#34;poetry-core&gt;=1.0.0&#34;</span>]
+</span></span><span style=display:flex><span><span style=color:#a6e22e>build-backend</span> = <span style=color:#e6db74>&#34;poetry.core.masonry.api&#34;</span>
+</span></span></code></pre></div><p>Then open up a Poetry virtual environment and install the dependencies in it:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>poetry shell
+</span></span><span style=display:flex><span>poetry install
+</span></span><span style=display:flex><span>poetry update
+</span></span></code></pre></div><p>Check the installation of Django:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>python -m django --version
+</span></span><span style=display:flex><span><span style=color:#75715e># 4.0.5</span>
+</span></span></code></pre></div><h3 id=starting-the-django-project-and-app>Starting the Django Project and App</h3><p>If you don&rsquo;t already know, Django has the concept of &ldquo;projects&rdquo; and pluggable &ldquo;apps&rdquo; that you install into the project.
+Let&rsquo;s start the project by running:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>django-admin startproject mysite .
+</span></span></code></pre></div><p>Note the trailing dot in the above command.</p><p>Now we can go ahead and create the django app.
 We&rsquo;ll make this application reusable, so go ahead and give it a name that suits your needs.
 For example, if your ultimate goal is to authenticate with <code>Dex</code> or <code>Keycloak</code> call it something like <code>dex_authentication</code> or <code>keycloak_authentication</code>.
-As a way of example, I am just going to do an in-memory authentication, so I will run:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>python manage.py startapp in_memory_authentication
-</span></span></code></pre></div><p>At this stage, we should already be able to start the Django application. Run:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>python manage.py runserver
-</span></span></code></pre></div><p>Navigate to the URL shown (usually <a href="http://localhost:8000">http://localhost:8000</a>) and you should see a lovely rocket blasting off:</p>
-
-<figure >
-    
-        <img class="center" src="rocket_ship.webp"  />
-    
-    
-    <figcaption>
-        <h6>The running Django application</h6>
-        
-    </figcaption>
-    
-</figure>
-
-<h2 id="understanding-djangos-default-user-authentication">Understanding Django&rsquo;s Default User Authentication</h2>
-<p>If don&rsquo;t know already and you&rsquo;re interested how Django would do normal User
+As a way of example, I am just going to do an in-memory authentication, so I will run:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>python manage.py startapp in_memory_authentication
+</span></span></code></pre></div><p>At this stage, we should already be able to start the Django application. Run:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>python manage.py runserver
+</span></span></code></pre></div><p>Navigate to the URL shown (usually <a href=http://localhost:8000>http://localhost:8000</a>) and you should see a lovely rocket blasting off:</p><figure><img class=center src=rocket_ship.webp><figcaption><h6>The running Django application</h6></figcaption></figure><h2 id=understanding-djangos-default-user-authentication>Understanding Django&rsquo;s Default User Authentication</h2><p>If don&rsquo;t know already and you&rsquo;re interested how Django would do normal User
 authentication, check out
-<a href="https://learndjango.com/tutorials/django-login-and-logout-tutorial">this great tutorial</a>.
+<a href=https://learndjango.com/tutorials/django-login-and-logout-tutorial>this great tutorial</a>.
 Because it&rsquo;s already covered so well there, I won&rsquo;t cover it here, and rather
-just proceed to customizing our user authentication.</p>
-<h2 id="implementing-a-login-page">Implementing a Login Page</h2>
-<p>The first thing we&rsquo;d need to do is include a login page for our Users to authenticate.
+just proceed to customizing our user authentication.</p><h2 id=implementing-a-login-page>Implementing a Login Page</h2><p>The first thing we&rsquo;d need to do is include a login page for our Users to authenticate.
 Go ahead and open the <code>./mysite/urls.py</code> file.
-Add the following marked lines to it:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> django.urls <span style="color:#f92672">import</span> path, include  <span style="color:#75715e"># Added &#34;include&#34; here</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>urlpatterns <span style="color:#f92672">=</span> [
-</span></span><span style="display:flex;"><span>    path(<span style="color:#e6db74">&#39;admin/&#39;</span>, admin<span style="color:#f92672">.</span>site<span style="color:#f92672">.</span>urls),
-</span></span><span style="display:flex;"><span>    path(<span style="color:#e6db74">&#34;accounts/&#34;</span>, include(<span style="color:#e6db74">&#34;django.contrib.auth.urls&#34;</span>)),  <span style="color:#75715e"># Added this line</span>
-</span></span><span style="display:flex;"><span>]
+Add the following marked lines to it:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>from</span> django.urls <span style=color:#f92672>import</span> path, include  <span style=color:#75715e># Added &#34;include&#34; here</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>urlpatterns <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>    path(<span style=color:#e6db74>&#39;admin/&#39;</span>, admin<span style=color:#f92672>.</span>site<span style=color:#f92672>.</span>urls),
+</span></span><span style=display:flex><span>    path(<span style=color:#e6db74>&#34;accounts/&#34;</span>, include(<span style=color:#e6db74>&#34;django.contrib.auth.urls&#34;</span>)),  <span style=color:#75715e># Added this line</span>
+</span></span><span style=display:flex><span>]
 </span></span></code></pre></div><p>What this does is mount the default Views provided in the <code>django.contrib.auth</code>
-app to a URL of our choice (in this case <code>accounts/</code>).</p>
-<p>Let&rsquo;s run the server again (<code>python manage.py runserver</code>) and this time navigate
-to <a href="http://localhost:8000/accounts/login">http://localhost:8000/accounts/login</a>.  Oops! You should get an error page
-saying:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>TemplateDoesNotExist at /accounts/login/
-</span></span></code></pre></div><p>That&rsquo;s because we need to define an HTML Template for the login page.  Do this
+app to a URL of our choice (in this case <code>accounts/</code>).</p><p>Let&rsquo;s run the server again (<code>python manage.py runserver</code>) and this time navigate
+to <a href=http://localhost:8000/accounts/login>http://localhost:8000/accounts/login</a>. Oops! You should get an error page
+saying:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>TemplateDoesNotExist at /accounts/login/
+</span></span></code></pre></div><p>That&rsquo;s because we need to define an HTML Template for the login page. Do this
 by creating the following folders in the root folder (i.e. NOT the <code>mysite</code> nor
-<code>in_memory_authentication</code> folders).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>mkdir templates
-</span></span><span style="display:flex;"><span>mkdir templates/registration
+<code>in_memory_authentication</code> folders).</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>mkdir templates
+</span></span><span style=display:flex><span>mkdir templates/registration
 </span></span></code></pre></div><p>Then create a <code>login.html</code> file in the <code>templates/registration</code> folder
-with the following content:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">h2</span>&gt;Log In&lt;/<span style="color:#f92672">h2</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>  {% csrf_token %}
-</span></span><span style="display:flex;"><span>  {{ form.as_p }}
-</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span>&gt;Log In&lt;/<span style="color:#f92672">button</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">form</span>&gt;
+with the following content:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>&lt;<span style=color:#f92672>h2</span>&gt;Log In&lt;/<span style=color:#f92672>h2</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>form</span> <span style=color:#a6e22e>method</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;post&#34;</span>&gt;
+</span></span><span style=display:flex><span>  {% csrf_token %}
+</span></span><span style=display:flex><span>  {{ form.as_p }}
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>button</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;submit&#34;</span>&gt;Log In&lt;/<span style=color:#f92672>button</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>form</span>&gt;
 </span></span></code></pre></div><p>One final thing we need to do is configure our Django project to look for
 templates in this folder structure. Open up the <code>settings.py</code> again, and look
-for the <code>TEMPLATES</code> constant:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>TEMPLATES <span style="color:#f92672">=</span> [
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># ...</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;DIRS&#39;</span>: [],
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># ...</span>
-</span></span><span style="display:flex;"><span>    },
-</span></span><span style="display:flex;"><span>]
-</span></span></code></pre></div><p>Change the <code>DIRS</code> value from an empty list to:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>TEMPLATES <span style="color:#f92672">=</span> [
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># ...</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;DIRS&#39;</span>: [BASE_DIR <span style="color:#f92672">/</span> <span style="color:#e6db74">&#34;templates&#34;</span>],
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># ...</span>
-</span></span><span style="display:flex;"><span>    },
-</span></span><span style="display:flex;"><span>]
+for the <code>TEMPLATES</code> constant:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span>TEMPLATES <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e># ...</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#39;DIRS&#39;</span>: [],
+</span></span><span style=display:flex><span>        <span style=color:#75715e># ...</span>
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>]
+</span></span></code></pre></div><p>Change the <code>DIRS</code> value from an empty list to:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span>TEMPLATES <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e># ...</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#39;DIRS&#39;</span>: [BASE_DIR <span style=color:#f92672>/</span> <span style=color:#e6db74>&#34;templates&#34;</span>],
+</span></span><span style=display:flex><span>        <span style=color:#75715e># ...</span>
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>]
 </span></span></code></pre></div><p>This instructs our Django project to look for templates in folders called
-<code>templates</code>.</p>
-<p>Restart the server and navigate to <a href="http://localhost:8000/accounts/login">http://localhost:8000/accounts/login</a> again.
-You should see a beautiful login form:</p>
-
-<figure >
-    
-        <img class="center" src="login.webp"  />
-    
-    
-    <figcaption>
-        <h6>The login form. Hey, if you wanted a tutorial on CSS you came to the wrong place.</h6>
-        
-    </figcaption>
-    
-</figure>
-
-<p>Attempting to login with details will not work, obviously, for a number of
-reasons:</p>
-<ol>
-<li>We have not yet migrated our database, so have no User table</li>
-<li>Even if we had migrated our database, we have not created any User records.</li>
-</ol>
-<p>Let&rsquo;s correct the first problem now. First, stop the server and then run the
-following command to migrate the database:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>python manage.py migrate
-</span></span></code></pre></div><blockquote>
-<p><strong>Huh?</strong> You may be wondering at this stage where the definition of our User table comes
+<code>templates</code>.</p><p>Restart the server and navigate to <a href=http://localhost:8000/accounts/login>http://localhost:8000/accounts/login</a> again.
+You should see a beautiful login form:</p><figure><img class=center src=login.webp><figcaption><h6>The login form. Hey, if you wanted a tutorial on CSS you came to the wrong place.</h6></figcaption></figure><p>Attempting to login with details will not work, obviously, for a number of
+reasons:</p><ol><li>We have not yet migrated our database, so have no User table</li><li>Even if we had migrated our database, we have not created any User records.</li></ol><p>Let&rsquo;s correct the first problem now. First, stop the server and then run the
+following command to migrate the database:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>python manage.py migrate
+</span></span></code></pre></div><blockquote><p><strong>Huh?</strong> You may be wondering at this stage where the definition of our User table comes
 from. It comes from the <code>django.contrib.auth</code> app which is by default in the
-<code>INSTALLED_APPS</code> in <code>settings.py</code>.</p>
-</blockquote>
-<p>Rerun the server, and try to login with any details. You should see a little
-message reading: <code>Please enter a correct username and password. ...</code></p>
-<h2 id="writing-a-custom-authentication-backend">Writing a Custom Authentication Backend</h2>
-<p>Let&rsquo;s now assume that we want to always allow access to the site with a
-hard-coded user with the credentials:</p>
-<ul>
-<li>Username: <code>let_me_in</code></li>
-<li>Password: <code>please</code></li>
-</ul>
-<p>Of course you would never want to do this, but it does illustrate how to create
-the custom Django authentication backend.</p>
-<p>First, let&rsquo;s create a new folder in our <code>./in_memory_authentication</code> folder
+<code>INSTALLED_APPS</code> in <code>settings.py</code>.</p></blockquote><p>Rerun the server, and try to login with any details. You should see a little
+message reading: <code>Please enter a correct username and password. ...</code></p><h2 id=writing-a-custom-authentication-backend>Writing a Custom Authentication Backend</h2><p>Let&rsquo;s now assume that we want to always allow access to the site with a
+hard-coded user with the credentials:</p><ul><li>Username: <code>let_me_in</code></li><li>Password: <code>please</code></li></ul><p>Of course you would never want to do this, but it does illustrate how to create
+the custom Django authentication backend.</p><p>First, let&rsquo;s create a new folder in our <code>./in_memory_authentication</code> folder
 called <code>backends</code>. Like any Python module, it will need a <code>__init__.py</code> file,
 so create that, and go ahead and create a file for the actual backend. I
-called mine <code>./in_memory_authentication/backends/in_memory_authentication_backend.py</code>.</p>
-<p>Let&rsquo;s populate this file now with the following:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e"># ./in_memory_authentication/backends/in_memory_authentication_backend.py</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> django.contrib.auth.backends <span style="color:#f92672">import</span> BaseBackend
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">InMemoryAuthenticationBackend</span>(BaseBackend):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">authenticate</span>(self, request, username<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, password<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+called mine <code>./in_memory_authentication/backends/in_memory_authentication_backend.py</code>.</p><p>Let&rsquo;s populate this file now with the following:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e># ./in_memory_authentication/backends/in_memory_authentication_backend.py</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> django.contrib.auth.backends <span style=color:#f92672>import</span> BaseBackend
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>InMemoryAuthenticationBackend</span>(BaseBackend):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>authenticate</span>(self, request, username<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, password<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>):
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>None</span>
 </span></span></code></pre></div><p>You will notice that I&rsquo;m extending the <code>BaseBackend</code> auth backend. It has a
 single function <code>authenticate</code> that takes in the request, as well as <code>username</code>
-and <code>password</code>. The function should respond in the following way:</p>
-<ul>
-<li>Should return <code>None</code> if the authentication attempt fails.</li>
-<li>Should return an instance of the User model if the authentication attempt succeeds.</li>
-</ul>
-<p>Let&rsquo;s export this in the newly-created <code>__init__.py</code> file:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e"># ./in_memory_authentication/backends/__init__.py</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> .in_memory_authentication_backend <span style="color:#f92672">import</span> InMemoryAuthenticationBackend
+and <code>password</code>. The function should respond in the following way:</p><ul><li>Should return <code>None</code> if the authentication attempt fails.</li><li>Should return an instance of the User model if the authentication attempt succeeds.</li></ul><p>Let&rsquo;s export this in the newly-created <code>__init__.py</code> file:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e># ./in_memory_authentication/backends/__init__.py</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> .in_memory_authentication_backend <span style=color:#f92672>import</span> InMemoryAuthenticationBackend
 </span></span></code></pre></div><p>Let&rsquo;s also &ldquo;register&rdquo; this backend with our Django app. Open up the <code>settings.py</code>
-file and make the following two changes:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>INSTALLED_APPS <span style="color:#f92672">=</span> [
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ... other apps</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;django.contrib.auth&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ... other apps</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;in_memory_authentication&#34;</span>,  <span style="color:#75715e"># Install our new app here</span>
-</span></span><span style="display:flex;"><span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># ...</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Add this to the bottom of the file:</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>AUTHENTICATION_BACKENDS <span style="color:#f92672">=</span> [
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;in_memory_authentication.backends.InMemoryAuthenticationBackend&#34;</span>,
-</span></span><span style="display:flex;"><span>]
+file and make the following two changes:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span>INSTALLED_APPS <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>    <span style=color:#75715e># ... other apps</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;django.contrib.auth&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#75715e># ... other apps</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;in_memory_authentication&#34;</span>,  <span style=color:#75715e># Install our new app here</span>
+</span></span><span style=display:flex><span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># ...</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Add this to the bottom of the file:</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>AUTHENTICATION_BACKENDS <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;in_memory_authentication.backends.InMemoryAuthenticationBackend&#34;</span>,
+</span></span><span style=display:flex><span>]
 </span></span></code></pre></div><p>Now if we attempt to login, our custom authentication backend will be called. Of
 course, we still won&rsquo;t be able to login since we are always returning <code>None</code> from
-our <code>authenticate</code> method.</p>
-<p>Let&rsquo;s change that now.</p>
-<p>Open up <code>./in_memory_authentication/backends/in_memory_authentication_backend.py</code> and
-alter it to:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e"># ./in_memory_authentication/backends/in_memory_authentication_backend.py</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> uuid
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> django.contrib.auth.backends <span style="color:#f92672">import</span> BaseBackend
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> django.contrib.auth.models <span style="color:#f92672">import</span> User
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">InMemoryAuthenticationBackend</span>(BaseBackend):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">authenticate</span>(self, request, username<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, password<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Replace this silly logic with whatever you need:</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> username <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;let_me_in&#34;</span> <span style="color:#f92672">and</span> password <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;please&#34;</span>:
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Create a new user</span>
-</span></span><span style="display:flex;"><span>            new_user <span style="color:#f92672">=</span> User(username<span style="color:#f92672">=</span>uuid<span style="color:#f92672">.</span>uuid4()<span style="color:#f92672">.</span>__str__())
-</span></span><span style="display:flex;"><span>            new_user<span style="color:#f92672">.</span>set_unusable_password()
-</span></span><span style="display:flex;"><span>            new_user<span style="color:#f92672">.</span>save()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> new_user
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+our <code>authenticate</code> method.</p><p>Let&rsquo;s change that now.</p><p>Open up <code>./in_memory_authentication/backends/in_memory_authentication_backend.py</code> and
+alter it to:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e># ./in_memory_authentication/backends/in_memory_authentication_backend.py</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> uuid
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> django.contrib.auth.backends <span style=color:#f92672>import</span> BaseBackend
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> django.contrib.auth.models <span style=color:#f92672>import</span> User
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>InMemoryAuthenticationBackend</span>(BaseBackend):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>authenticate</span>(self, request, username<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, password<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>):
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Replace this silly logic with whatever you need:</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> username <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;let_me_in&#34;</span> <span style=color:#f92672>and</span> password <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;please&#34;</span>:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Create a new user</span>
+</span></span><span style=display:flex><span>            new_user <span style=color:#f92672>=</span> User(username<span style=color:#f92672>=</span>uuid<span style=color:#f92672>.</span>uuid4()<span style=color:#f92672>.</span><span style=color:#a6e22e>__str__</span>())
+</span></span><span style=display:flex><span>            new_user<span style=color:#f92672>.</span>set_unusable_password()
+</span></span><span style=display:flex><span>            new_user<span style=color:#f92672>.</span>save()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> new_user
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>None</span>
 </span></span></code></pre></div><p>This is some silly logic, and you should replace it with what you need, but
 it creates a new User and returns that user, thus logging them in. You should
-replace this with things like a call to a Dex or Keycloak API, for example.</p>
-<p>If you now login with the credentials <code>let_me_in</code> and <code>please</code>, you should
-successfully authenticate.</p>
-<p>Of course, we have not built any pages after the user logs in, so you should get
-a <code>404 Page not found</code> error at this stage.</p>
-<h2 id="catering-for-custom-user-classes">Catering for Custom User Classes</h2>
-<p>You&rsquo;ll notice above that I am returning an instance of the <code>django.contrib.auth.models.User</code>
+replace this with things like a call to a Dex or Keycloak API, for example.</p><p>If you now login with the credentials <code>let_me_in</code> and <code>please</code>, you should
+successfully authenticate.</p><p>Of course, we have not built any pages after the user logs in, so you should get
+a <code>404 Page not found</code> error at this stage.</p><h2 id=catering-for-custom-user-classes>Catering for Custom User Classes</h2><p>You&rsquo;ll notice above that I am returning an instance of the <code>django.contrib.auth.models.User</code>
 class. However, not all Django projects will use this, and it is therefore
 better to make use of the <code>get_user_model()</code> function to find what class this
-project uses.  Further, we can extract the finding of the user into a method:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e"># ./in_memory_authentication/backends/in_memory_authentication_backend.py</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> uuid
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> django.contrib.auth.backends <span style="color:#f92672">import</span> BaseBackend
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> django.contrib.auth <span style="color:#f92672">import</span> get_user_model
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">InMemoryAuthenticationBackend</span>(BaseBackend):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">authenticate</span>(self, request, username<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, password<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>find_user(username, password)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Replace this silly logic with something better, such as an API call to</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># an identity provider:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find_user</span>(self, username, password):
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> username <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;let_me_in&#34;</span> <span style="color:#f92672">and</span> password <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;please&#34;</span>:
-</span></span><span style="display:flex;"><span>            user_klass <span style="color:#f92672">=</span> get_user_model()
-</span></span><span style="display:flex;"><span>            new_user <span style="color:#f92672">=</span> user_klass(username<span style="color:#f92672">=</span>uuid<span style="color:#f92672">.</span>uuid4()<span style="color:#f92672">.</span>__str__())
-</span></span><span style="display:flex;"><span>            new_user<span style="color:#f92672">.</span>set_unusable_password()
-</span></span><span style="display:flex;"><span>            new_user<span style="color:#f92672">.</span>save()
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> new_user
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+project uses. Further, we can extract the finding of the user into a method:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e># ./in_memory_authentication/backends/in_memory_authentication_backend.py</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> uuid
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> django.contrib.auth.backends <span style=color:#f92672>import</span> BaseBackend
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> django.contrib.auth <span style=color:#f92672>import</span> get_user_model
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>InMemoryAuthenticationBackend</span>(BaseBackend):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>authenticate</span>(self, request, username<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, password<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>):
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> self<span style=color:#f92672>.</span>find_user(username, password)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Replace this silly logic with something better, such as an API call to</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># an identity provider:</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>find_user</span>(self, username, password):
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> username <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;let_me_in&#34;</span> <span style=color:#f92672>and</span> password <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;please&#34;</span>:
+</span></span><span style=display:flex><span>            user_klass <span style=color:#f92672>=</span> get_user_model()
+</span></span><span style=display:flex><span>            new_user <span style=color:#f92672>=</span> user_klass(username<span style=color:#f92672>=</span>uuid<span style=color:#f92672>.</span>uuid4()<span style=color:#f92672>.</span><span style=color:#a6e22e>__str__</span>())
+</span></span><span style=display:flex><span>            new_user<span style=color:#f92672>.</span>set_unusable_password()
+</span></span><span style=display:flex><span>            new_user<span style=color:#f92672>.</span>save()
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> new_user
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>None</span>
 </span></span></code></pre></div><p>That&rsquo;s it! We&rsquo;ve successfully created and used our own custom authentication
-backend in Django.</p>
-
-                    </div>
-
-                    
-                    <div class="after-post-tags">
-                        <ul class="tags">
-                        
-                        <li>
-                        <a href="/tags/medium">medium</a>
-                        </li>
-                        
-                        <li>
-                        <a href="/tags/django">django</a>
-                        </li>
-                        
-                        <li>
-                        <a href="/tags/python">python</a>
-                        </li>
-                        
-                        <li>
-                        <a href="/tags/authentication">authentication</a>
-                        </li>
-                        
-                        <li>
-                        <a href="/tags/login">login</a>
-                        </li>
-                        
-                        <li>
-                        <a href="/tags/webapp">webapp</a>
-                        </li>
-                        
-                        </ul>
-                    </div>
-                    
-
-                    
-                    <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
-                    
-                        <a class="d-block col-md-6" href="https://blog.melio.ai/ai-time-to-value/"> &laquo; Accelerating AI/ML Value: Transforming Investment to Impact</a>
-                    
-                    
-                        <a class="d-block col-md-6 text-lg-right" href="https://blog.melio.ai/on-the-naivety-of-ml-models/">The naivety of ML models and avoiding the naive trap &raquo;</a>
-                    
-                    <div class="clearfix"></div>
-                    </div>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-<div class="container">
-    <div id="comments" class="row justify-content-center mb-5">
-        <div class="col-md-8">              
-                           
-        </div>
-    </div>
-</div>
-
-    </div>
-
-
-            </div>
-<div>
-	<p style="margin-bottom:3cm;"> </p>
-</div>
-<footer class="footer">
-    <div class="footer-top">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col col-md-1"></div>
-                <div class="footer-col col-md-4">
-                    <h5>Contact Us</h5>
-                    <p>info@melio.ai</p>
-                </div>
-                <div class="footer-col col-md-2">
-                </div>
-                <div class="footer-col col-md-4">
-                    <h5>About Melio Consulting</h5>
-                    <p>We specialise in developing and deploying machine learning solutions in the cloud. Melio has experience across financial, telecommunications and entertainment industries.</p>
-                </div>
-                <div class="footer-col col-md-1"></div>
-            </div>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <div class="container">
-            <div class="col-md-12">
-                <p>Copyright © 2022 Melio Consulting (Pty) Ltd </br> All Rights Reserved<br>
-                </p>
-            </div>
-        </div>
-    </div>
-</footer>
-
-        </div>
-
-
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-<script src="/js/mediumish.js"></script>
-
-    </body>
-</html>
+backend in Django.</p></div><div class=after-post-tags><ul class=tags><li><a href=/tags/medium>medium</a></li><li><a href=/tags/django>django</a></li><li><a href=/tags/python>python</a></li><li><a href=/tags/authentication>authentication</a></li><li><a href=/tags/login>login</a></li><li><a href=/tags/webapp>webapp</a></li></ul></div><div class="row PageNavigation d-flex justify-content-between font-weight-bold"><a class="d-block col-md-6" href=https://blog.melio.ai/ai-time-to-value/>&#171; Accelerating AI/ML Value: Transforming Investment to Impact</a>
+<a class="d-block col-md-6 text-lg-right" href=https://blog.melio.ai/on-the-naivety-of-ml-models/>The naivety of ML models and avoiding the naive trap &#187;</a><div class=clearfix></div></div></div></div></div><div class=container><div id=comments class="row justify-content-center mb-5"><div class=col-md-8></div></div></div></div></div><div><p style=margin-bottom:3cm></p></div><div class="fixed-bottom p-4"><div class="toast w-100 mw-100" role=alert data-autohide=false><div class="toast-body d-flex flex-column"><div class="row h-100 justify-content-center align-items-center"><div class="col-lg-9 col-md-10 offset-lg-1"><p style=margin-bottom:0>This website places cookies on your computer or device to make the site work better and to help
+us understand how you use our site.
+Further use of this site (by clicking, navigating or scrolling) will be considered consent.
+Please visit our <a href=/privacy>privacy policy</a> for more information.</p></div><div class="col-lg-1 col-md-2"><button type=button class="btn btn-light" id=btnAccept>
+Accept</button></div></div></div></div></div><footer class=footer><div class=footer-top><div class=container><div class=row><div class="footer-col col-md-4 pse-md-5"><h5>Contact Us</h5><p>info@melio.ai</p><a href=/privacy style=font-size:14px><i class="fa fa-shield" aria-hidden=true></i> Privacy
+Policy</p></a></div><div class="footer-col col-md-4 pse-md-5"><h5>Address</h5><p>Melio AI, Workshop 17 The Bank<br>24 Cradock Avenue<br>Rosebank<br>Johannesburg<br>2196<br></p></div><div class="footer-col col-md-4 pse-md-5"><h5>About Melio Consulting</h5><p>We specialise in developing and deploying machine learning solutions in the cloud. Melio has
+experience across financial, telecommunications and entertainment industries.</p></div></div></div></div><div class=footer-bottom><div class=container><div class=col-md-12><p>Copyright © 2020-2025 Melio Consulting (Pty) Ltd</br>All Rights Reserved<br></p></div></div></div></footer></div><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js integrity=sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut crossorigin=anonymous></script><script src=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js integrity=sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM crossorigin=anonymous></script><script src=/js/mediumish.js></script></body></html>
